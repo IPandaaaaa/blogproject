@@ -1,7 +1,7 @@
 from fabric.api import env, run
 from fabric.operations import sudo
 
-GIT_REPO =  'https://github.com/IPandaaaaa/django-blog.git'
+GIT_REPO =  "https://github.com/IPandaaaaa/blogproject.git"
 
 env.user = 'panda'
 env.password = 'ls6836211'
@@ -15,10 +15,10 @@ def deploy():
 
     run('cd %s && git pull' % source_folder)
     run("""
-        cd{}&&
-        ../env/bin/pip install -r requirements.txt &&
-        ../env/bin/python3 manage.py collectstatic --noinput &&
-        ../env/bin/python3 manage.py migrate
+        cd {} &&
+        ../sites/env/bin/pip install -r requirements.txt &&
+        ../sites/env/bin/python3 manage.py collectstatic --noinput &&
+        ../sites/env/bin/python3 manage.py migrate
         """.format(source_folder))
-    sudo('restart gunicorn-panda')
+    sudo('systemctl restart panda.service')
     sudo('service nginx reload')

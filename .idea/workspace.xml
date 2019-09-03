@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8d0b4f3-bd12-4689-9934-9c7940c06e80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/fabfile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blogproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogproject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fabfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/fabfile.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +88,7 @@
       <workItem from="1567168751011" duration="800000" />
       <workItem from="1567170572808" duration="3097000" />
       <workItem from="1567432397696" duration="229000" />
-      <workItem from="1567506773086" duration="1534000" />
+      <workItem from="1567506773086" duration="4765000" />
     </task>
     <servers />
   </component>
