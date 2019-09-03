@@ -16,9 +16,9 @@ def deploy():
     run('cd %s && git pull' % source_folder)
     run("""
         cd {} &&
-        ../sites/env/bin/pip install -r requirements.txt &&
-        ../sites/env/bin/python3 manage.py collectstatic --noinput &&
-        ../sites/env/bin/python3 manage.py migrate
+        ../env/bin/pip install -r requirements.txt &&
+        ../env/bin/python3 manage.py collectstatic --noinput &&
+        ../env/bin/python3 manage.py migrate
         """.format(source_folder))
     sudo('systemctl restart panda.service')
     sudo('service nginx reload')
