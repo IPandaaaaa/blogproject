@@ -2,7 +2,7 @@
 
 
 from django import template
-from blog.models import Post, Category
+from blog.models import Post, Category, Tag
 from django.db.models.aggregates import Count
 
 register = template.Library()
@@ -20,8 +20,8 @@ def archives():  # 实现归档
     date_list = Post.objects.dates('created_time', 'month', order='DESC')
     date_list_t = []
     for date in date_list:
-        date_num = Post.objects.filter(created_time__year=date.year,created_time__month=date.month).count()
-        date_list_t.append({'year':date.year,'month':date.month,'num':date_num})
+        date_num = Post.objects.filter(created_time__year=date.year, created_time__month=date.month).count()
+        date_list_t.append({'year': date.year, 'month': date.month, 'num': date_num})
     return date_list_t
 
 
@@ -29,3 +29,8 @@ def archives():  # 实现归档
 def get_categories():
     return Category.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)
     # num_posts__gt为查询表达式  过滤掉没有post的分类
+
+
+@register.simple_tag()
+def get_tags():
+    return Tag.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)

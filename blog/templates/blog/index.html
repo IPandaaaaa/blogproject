@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block main %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
     {% for post in post_list %}
         <article class="post post-{{ post.pk }}">
             <header class="entry-header">
@@ -13,9 +16,10 @@
                     <span class="post-date"><a
                             href="{% url 'blog:archives' post.created_time.date.year post.created_time.date.month %}"><time
                             class="entry-date">{{ post.created_time }}</time></a></span>
-                    <span class="post-author"><a href="{% url 'blog:author' post.author_id %}">{{ post.author }}</a></span>
-                    <span class="comments-link"><a href="{% url 'blog:detail' post.pk %}">{{post.comment_set.count}} 评论</a></span>
-                    <span class="views-count"><a href="#">588 阅读</a></span>
+                    <span class="post-author"><a
+                            href="{% url 'blog:author' post.author_id %}">{{ post.author }}</a></span>
+                    <span class="comments-link"><a href="{% url 'blog:detail' post.pk %}">{{ post.comment_set.count }} 评论</a></span>
+                    <span class="views-count"><a href="{{ post.get_absolute_url }}">{{ post.views }} 阅读</a></span>
                 </div>
             </header>
             <div class="entry-content clearfix">
@@ -28,24 +32,31 @@
     {% empty %}
         <div class="no-post">暂时还没有发布的文章！</div>
     {% endfor %}
-    <!-- 简单分页效果
-    <div class="pagination-simple">
-        <a href="#">上一页</a>
-        <span class="current">第 6 页 / 共 11 页</span>
-        <a href="#">下一页</a>
-    </div>
-    -->
-    <div class="pagination">
-        <ul>
-            <li><a href="">1</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li class="current"><a href="">6</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="">8</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">11</a></li>
-        </ul>
-    </div>
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if first %}
+                <a href="?page=1">1</a>
+            {% endif %}
+            {% if left %}
+                {% if left_has_more %}
+                    <span>...</span>
+                {% endif %}
+                {% for i in left %}
+                    <a href="?page={{ i }}">{{ i }}</a>
+                {% endfor %}
+            {% endif %}
+            <a href="?page={{ page_obj.number }}" style="color: #ff1c08">{{ page_obj.number }}</a>
+            {% if right %}
+                {% for i in right %}
+                    <a href="?page={{ i }}">{{ i }}</a>
+                {% endfor %}
+                {% if right_has_more %}
+                    <span>...</span>
+                {% endif %}
+            {% endif %}
+            {% if last %}
+                <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endblock main %}

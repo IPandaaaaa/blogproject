@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include
+from blog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('comments.urls')),
+    path('all/rss/', AllPostsRssFeed(), name='rss'),
 ]
